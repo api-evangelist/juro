@@ -1,0 +1,195 @@
+{
+  "info": {
+    "name": "Juro API",
+    "description": "Programmatic contract automation and contract lifecycle management (CLM) on the Juro platform. Base URL: https://api.juro.com/v3 (production) or https://api-sandbox.juro.io/v3 (sandbox). All requests are authenticated with an x-api-key header. API access is plan-gated and enabled through your Juro Customer Success Manager. Contracts, Templates, and Signatures endpoints are confirmed from api-docs.juro.com; Webhooks management endpoints are modeled from Juro help-center guidance.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-api-key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.juro.com/v3", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Check API status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] },
+            "description": "Returns the API status and confirms the API key is valid."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "List templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates?skip=0&limit=50", "host": ["{{baseUrl}}"], "path": ["templates"], "query": [{ "key": "skip", "value": "0" }, { "key": "limit", "value": "50" }] },
+            "description": "Returns a paginated list of all templates accessible to the API key holder."
+          }
+        },
+        {
+          "name": "Retrieve a template",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates/:template_id", "host": ["{{baseUrl}}"], "path": ["templates", ":template_id"], "variable": [{ "key": "template_id", "value": "" }] },
+            "description": "Retrieves a single template by ID, including its smart fields."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contracts",
+      "item": [
+        {
+          "name": "List contracts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/contracts?skip=0&limit=50", "host": ["{{baseUrl}}"], "path": ["contracts"], "query": [{ "key": "skip", "value": "0" }, { "key": "limit", "value": "50" }] },
+            "description": "Returns a paginated list of all contracts accessible to the API key holder."
+          }
+        },
+        {
+          "name": "Create a contract from a template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"templateId\": \"\",\n  \"fields\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/contracts", "host": ["{{baseUrl}}"], "path": ["contracts"] },
+            "description": "Creates a new contract from a Juro template with smart-field data."
+          }
+        },
+        {
+          "name": "Upload a PDF as a contract",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": [] }] },
+            "url": { "raw": "{{baseUrl}}/contracts/upload", "host": ["{{baseUrl}}"], "path": ["contracts", "upload"] },
+            "description": "Creates a contract by uploading an existing PDF document."
+          }
+        },
+        {
+          "name": "Retrieve a contract",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id"], "variable": [{ "key": "contract_id", "value": "" }] },
+            "description": "Retrieves a single contract by ID, including smart fields and state."
+          }
+        },
+        {
+          "name": "Update a contract",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"fields\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id"], "variable": [{ "key": "contract_id", "value": "" }] },
+            "description": "Updates a contract's properties and smart-field values."
+          }
+        },
+        {
+          "name": "Delete a contract",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id"], "variable": [{ "key": "contract_id", "value": "" }] },
+            "description": "Deletes a contract by ID."
+          }
+        },
+        {
+          "name": "Download contract PDF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id/pdf/binary", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id", "pdf", "binary"], "variable": [{ "key": "contract_id", "value": "" }] },
+            "description": "Downloads the generated or signed contract as a binary PDF."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Signatures",
+      "item": [
+        {
+          "name": "Sign a contract",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id/sign", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id", "sign"], "variable": [{ "key": "contract_id", "value": "" }] },
+            "description": "Applies a signature to a contract on behalf of the API key holder's signing side."
+          }
+        },
+        {
+          "name": "Send a contract for signing",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id/signing-request/:signing_side_uid", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id", "signing-request", ":signing_side_uid"], "variable": [{ "key": "contract_id", "value": "" }, { "key": "signing_side_uid", "value": "" }] },
+            "description": "Sends a signing request to a signing side of the contract."
+          }
+        },
+        {
+          "name": "Send a signing request to a signatory",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/contracts/:contract_id/signing-request/:signing_side_uid/signatures/:signature_uid", "host": ["{{baseUrl}}"], "path": ["contracts", ":contract_id", "signing-request", ":signing_side_uid", "signatures", ":signature_uid"], "variable": [{ "key": "contract_id", "value": "" }, { "key": "signing_side_uid", "value": "" }, { "key": "signature_uid", "value": "" }] },
+            "description": "Sends a signing request to a specific signatory within a signing side."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks (modeled)",
+      "item": [
+        {
+          "name": "List webhooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] },
+            "description": "Modeled. Lists webhook subscriptions. Webhooks are primarily managed in the Juro app."
+          }
+        },
+        {
+          "name": "Create a webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"teamId\": \"\",\n  \"title\": \"\",\n  \"url\": \"\",\n  \"isEnabled\": true,\n  \"auth\": {},\n  \"events\": [\"contract.signed\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] },
+            "description": "Modeled. Registers a webhook subscription for contract lifecycle events."
+          }
+        },
+        {
+          "name": "Delete a webhook",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/webhooks/:webhook_id", "host": ["{{baseUrl}}"], "path": ["webhooks", ":webhook_id"], "variable": [{ "key": "webhook_id", "value": "" }] },
+            "description": "Modeled. Deletes a webhook subscription."
+          }
+        }
+      ]
+    }
+  ]
+}

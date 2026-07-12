@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/juro-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  keyName: x-api-key
+  scheme: api-key
+  description: 'API key generated in the Juro app under Settings > Integrations > API
+    (also referred to as the Connectors hub). Sent on every request as the `x-api-key`
+    header. API access is plan-gated - it is included with a Juro subscription and
+    enabled through your Customer Success Manager. A sandbox key/environment is
+    available at https://api-sandbox.juro.io/v3.'
+  sources:
+  - openapi/juro-openapi.yml
+  - https://api-docs.juro.com/
+  - https://intercom.help/juro/en/articles/8075637-working-with-juro-s-api

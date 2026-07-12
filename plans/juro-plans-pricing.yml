@@ -1,0 +1,108 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Juro
+providerId: juro
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Contract Management
+- CLM
+- Legal
+- Contract Automation
+- Plans
+description: >-
+  Juro does not publish per-seat list prices; pricing is quote-based through a
+  sales process and structured around platform tiers (commonly a Scale tier and an
+  Enterprise tier) plus AI add-ons. A notable differentiator is that higher tiers
+  offer unlimited user seats rather than per-user pricing, so cost scales with
+  contract volume, workflow complexity, and integrations rather than headcount.
+  Third-party marketplace data places typical annual contracts in the roughly
+  $15,000-$60,000 range, with enterprise deals reaching $75,000-$120,000+. API
+  access is not a standalone product - it is plan-gated and included with a Juro
+  subscription, enabled through your Customer Success Manager. The figures below are
+  modeled from public third-party pricing data and Juro's pricing page and are not
+  reconciled against an official rate card.
+notes: >-
+  All prices are indicative and quote-based. Juro's pricing page routes to a demo /
+  sales quote. Confirm current tiers, seat model, AI add-on costs, and whether your
+  plan includes API access with Juro directly.
+sources:
+- https://juro.com/pricing
+- https://api-docs.juro.com/
+- https://intercom.help/juro/en/articles/8075637-working-with-juro-s-api
+plans:
+- id: juro-scale
+  name: Scale
+  type: subscription
+  description: >-
+    Growth tier for teams standardizing contract creation, negotiation, and
+    e-signature in Juro, typically with unlimited user seats and core automation.
+    API access is included subject to your agreement. Quote-based annual pricing.
+  entries:
+  - label: Annual Subscription
+    name: scale_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: quote-based (indicative $15,000+/yr)
+    userMultiplied: false
+  elements:
+  - name: Unlimited User Seats
+  - name: Contract Templates and Smart Fields
+  - name: Native E-Signature
+  - name: API Access (plan-gated)
+  - name: Webhooks
+- id: juro-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Tier for larger organizations with high contract volumes, advanced approval
+    workflows, custom integrations, security review, SSO, and dedicated support.
+    Includes API access and higher request quotas. Quote-based annual pricing.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (indicative $40,000-$120,000+/yr)
+    userMultiplied: false
+  elements:
+  - name: Unlimited User Seats
+  - name: Advanced Approval Workflows
+  - name: Custom Integrations and API
+  - name: Higher API Request Quota
+  - name: SSO and Security Review
+  - name: Dedicated Support and SLAs
+- id: juro-ai-addons
+  name: AI Add-ons
+  type: addon
+  description: >-
+    Juro's AI-native features (AI drafting, review, and summarization) may be
+    offered as add-ons or bundled into higher tiers. Pricing is quote-based.
+  entries:
+  - label: AI Add-on
+    name: ai_addon
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: quote-based
+    userMultiplied: false
+  elements:
+  - name: AI Drafting
+  - name: AI Review
+  - name: AI Summarization
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

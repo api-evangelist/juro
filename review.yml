@@ -1,0 +1,118 @@
+aid: juro
+name: Juro
+review:
+  question: Does Juro expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Juro's asynchronous event delivery is
+    outbound webhooks (server-to-your-endpoint HTTP POST), not a server-push
+    streaming transport on Juro's own API. There is no WebSocket (ws/wss) or
+    Server-Sent Events (SSE) surface on the Juro API to model. The webhook event
+    catalog is documented, but the events are delivered by Juro POSTing to a URL
+    you host, so there is no Juro-hosted realtime channel to describe in AsyncAPI.
+findings:
+  summary: |
+    Juro does not publish a documented public WebSocket API. Juro is an AI-native
+    contract automation / contract lifecycle management (CLM) platform. Its public
+    API is v3 REST over HTTPS, base https://api.juro.com/v3 (sandbox
+    https://api-sandbox.juro.io/v3), authenticated with an x-api-key header. The
+    API covers contracts (create from template, upload PDF, read/update smart
+    fields, delete, download signed PDF), templates (list/get), and e-signature
+    (sign, send signing requests). Asynchronous notifications are delivered via
+    outbound webhooks for a documented set of contract lifecycle events. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) or SSE
+    endpoint is documented on Juro's API.
+  accessModel: |
+    API access is plan-gated. It is included with a Juro subscription and enabled
+    through the customer's Customer Success Manager; monthly request quota depends
+    on the plan (roughly 100 requests/month on free access, roughly 30,000/month on
+    paid). Live calls require an eligible plan and an issued x-api-key. Because of
+    this gating, the API surface was verified against Juro's public API reference
+    (api-docs.juro.com) and help center rather than exercised against a live key.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.juro.com/v3
+      documented: true
+      note: Full v3 API - contracts, templates, signatures. Sandbox at https://api-sandbox.juro.io/v3.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP POST of contract lifecycle events to a URL you host, with Basic auth or HMAC-SHA256 signature validation. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Juro's API reference or help center as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming surface is documented on Juro's API.
+  endpointsConfirmedRest:
+    - GET    https://api.juro.com/v3/health
+    - GET    https://api.juro.com/v3/templates
+    - GET    https://api.juro.com/v3/templates/{template_id}
+    - GET    https://api.juro.com/v3/contracts
+    - POST   https://api.juro.com/v3/contracts
+    - POST   https://api.juro.com/v3/contracts/upload
+    - GET    https://api.juro.com/v3/contracts/{contract_id}
+    - PATCH  https://api.juro.com/v3/contracts/{contract_id}
+    - DELETE https://api.juro.com/v3/contracts/{contract_id}
+    - GET    https://api.juro.com/v3/contracts/{contract_id}/pdf/binary
+    - POST   https://api.juro.com/v3/contracts/{contract_id}/sign
+    - POST   https://api.juro.com/v3/contracts/{contract_id}/signing-request/{signing_side_uid}
+    - POST   https://api.juro.com/v3/contracts/{contract_id}/signing-request/{signing_side_uid}/signatures/{signature_uid}
+  endpointsModeled:
+    - GET    https://api.juro.com/v3/webhooks
+    - POST   https://api.juro.com/v3/webhooks
+    - DELETE https://api.juro.com/v3/webhooks/{webhook_id}
+  endpointsModeledNote: |
+    Webhook subscriptions are primarily created and managed in the Juro app under
+    Settings > Integrations > Webhooks. Juro's help center describes registering a
+    webhook programmatically (body with teamId, title, url, isEnabled, auth,
+    events), but a full CRUD webhook-management surface is not confirmed in the
+    public v3 API reference. The webhook management endpoints in the OpenAPI and
+    collections are flagged x-endpoint-modeled: true and should be reconciled
+    against Juro's live documentation before relying on them.
+  webhookEvents:
+    - contract.created
+    - contract.deleted
+    - contract.edit
+    - contract.commented
+    - contract.comment.deleted
+    - contract.viewed
+    - contract.pdf_generated
+    - contract.sent_link_to_counterparty
+    - contract.signed
+    - contract.approval_requested
+    - contract.approval_in_progress
+    - contract.approval_process_finished
+    - contract.approval_denied
+    - contract.approval_request_cancelled
+sources:
+  - url: https://api-docs.juro.com/
+    type: APIReference
+    note: v3 REST reference - base URL, x-api-key auth, contracts/templates/signatures endpoints, pagination, rate limits, webhook events. No WebSocket.
+  - url: https://intercom.help/juro/en/articles/8075637-working-with-juro-s-api
+    type: Documentation
+    note: Help-center guide - plan-gated API access via CSM, webhook registration fields, quota governed by plan.
+  - url: https://juro.com/integrations/api
+    type: Documentation
+    note: Product page for the Juro API - customized contract workflows, initiate contracts from any system.
+  - url: https://juro.com/pricing
+    type: Pricing
+    note: Quote-based tiers; unlimited seats on higher tiers.
+  - url: https://juro.com/terms/api-terms
+    type: TermsOfService
+    note: Juro API terms of service.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on the Juro API. Juro's own public API is
+    request/response REST (v3) plus outbound webhooks for contract lifecycle events.
+    No AsyncAPI document was created because there is no server-push transport
+    (WebSocket or SSE) on Juro's own API to model - webhook events are delivered by
+    Juro POSTing to a consumer-hosted URL.

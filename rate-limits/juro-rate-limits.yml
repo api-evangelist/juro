@@ -1,0 +1,69 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Juro
+providerId: juro
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Contract Management
+- CLM
+- Legal
+- Rate Limiting
+- Quotas
+description: >-
+  Juro governs the v3 API with both a monthly request quota and per-second rate
+  limits, and the quota depends on whether API access is on a free/trial footing
+  or a paid subscription. Juro's documentation describes a free tier at roughly 100
+  requests per month and a paid tier at roughly 30,000 requests per month, both at
+  about 10 requests per second with a burst of 20. Certain write operations carry
+  tighter method-specific limits - contract creation is throttled more aggressively
+  and PDF operations more aggressively still. Because API access is plan-gated,
+  effective quotas are ultimately set by your Juro subscription; confirm exact
+  numbers with your Customer Success Manager.
+notes: >-
+  Numbers below reflect Juro's public API-docs guidance at the review date and may
+  change per contract. The per-second and burst figures apply across the API;
+  method-specific caps apply on top of them for create and PDF endpoints.
+sources:
+- https://api-docs.juro.com/
+- https://intercom.help/juro/en/articles/8075637-working-with-juro-s-api
+responseCodes:
+  throttled: 429
+limits:
+- name: Free Tier Monthly Quota
+  scope: account
+  metric: requests
+  limit: ~100 per month
+  notes: Free/trial API access allowance per Juro's API docs.
+- name: Paid Tier Monthly Quota
+  scope: account
+  metric: requests
+  limit: ~30000 per month
+  notes: Paid subscription API access allowance per Juro's API docs.
+- name: Global Request Rate
+  scope: account
+  metric: requests
+  limit: ~10 per second (burst 20)
+  notes: Applies across the API for all endpoints.
+- name: Contract Creation Rate
+  scope: account
+  metric: requests
+  limit: ~5 per second
+  notes: Tighter method-specific cap on POST /v3/contracts.
+- name: PDF Operation Rate
+  scope: account
+  metric: requests
+  limit: ~1 per second
+  notes: Tighter method-specific cap on PDF generation/download operations.
+policies:
+- name: Plan-Governed Quota
+  description: Monthly request allowance is governed by your Juro plan; verify quota before large-scale syncs or bulk contract operations.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Pagination
+  description: List endpoints use skip/limit paging (limit default 50, max 200) to keep request counts within quota.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

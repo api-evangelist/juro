@@ -1,0 +1,150 @@
+aid: juro
+url: https://raw.githubusercontent.com/api-evangelist/juro/refs/heads/main/apis.yml
+name: Juro
+kind: company
+description: Juro is an AI-native contract automation and contract lifecycle management
+  (CLM) platform where legal, sales, HR, and finance teams create, negotiate, sign,
+  and manage contracts in one browser-based workspace. Juro exposes a documented
+  public REST API (v3, base https://api.juro.com/v3, with a sandbox at
+  https://api-sandbox.juro.io/v3) authenticated with an x-api-key header. The API
+  lets external systems initiate contracts from templates, upload PDFs, edit smart
+  fields, send contracts for e-signature, download signed PDFs, and subscribe to a
+  dozen-plus contract lifecycle webhook events (contract.created, contract.signed,
+  approval events, and more). API access is plan-gated - it is included with a Juro
+  subscription and enabled through your Customer Success Manager - so live calls
+  require an eligible plan and issued key.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Contract Management
+- CLM
+- Contract Lifecycle
+- Contract Automation
+- Legal
+- LegalTech
+- E-Signature
+- Contracts
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: juro:juro-contracts-api
+  name: Juro Contracts API
+  tags:
+  - Contract Management
+  - CLM
+  - Contracts
+  - Contract Lifecycle
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api-docs.juro.com/
+  baseURL: https://api.juro.com/v3
+  properties:
+  - url: https://api-docs.juro.com/
+    type: Documentation
+  - url: https://api-docs.juro.com/
+    type: APIReference
+  - url: openapi/juro-openapi.yml
+    type: OpenAPI
+  - url: collections/juro.postman_collection.json
+    type: PostmanCollection
+  - url: collections/juro.opencollection.json
+    type: OpenCollection
+  description: Create, retrieve, list, update, and delete contracts. Initiate a
+    contract from a Juro template and pass in smart-field data, upload an existing
+    PDF to create a contract, patch contract properties and smart fields, list
+    contracts with skip/limit pagination, and download the generated or signed PDF
+    as binary. This is the core surface for the "contract management" use case.
+- aid: juro:juro-templates-api
+  name: Juro Templates API
+  tags:
+  - Templates
+  - Contract Management
+  - CLM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api-docs.juro.com/
+  baseURL: https://api.juro.com/v3
+  properties:
+  - url: https://api-docs.juro.com/
+    type: Documentation
+  - url: openapi/juro-openapi.yml
+    type: OpenAPI
+  - url: collections/juro.postman_collection.json
+    type: PostmanCollection
+  - url: collections/juro.opencollection.json
+    type: OpenCollection
+  description: List the contract templates available to the API key holder and
+    retrieve a specific template, including its smart fields, so external systems
+    know what data to supply when initiating a new contract via the Contracts API.
+- aid: juro:juro-signatures-api
+  name: Juro Signatures API
+  tags:
+  - E-Signature
+  - Signatures
+  - Contract Lifecycle
+  - Legal
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api-docs.juro.com/
+  baseURL: https://api.juro.com/v3
+  properties:
+  - url: https://api-docs.juro.com/
+    type: Documentation
+  - url: openapi/juro-openapi.yml
+    type: OpenAPI
+  - url: collections/juro.postman_collection.json
+    type: PostmanCollection
+  - url: collections/juro.opencollection.json
+    type: OpenCollection
+  description: Drive the e-signature stage of the contract lifecycle. Apply a
+    signature to a contract, send a signing request to a signing side, and send a
+    signing request to a specific signatory - moving a contract from drafted to
+    fully executed without leaving your own system.
+- aid: juro:juro-webhooks-api
+  name: Juro Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Contract Lifecycle
+  - CLM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api-docs.juro.com/
+  baseURL: https://api.juro.com/v3
+  properties:
+  - url: https://api-docs.juro.com/
+    type: Documentation
+  - url: openapi/juro-openapi.yml
+    type: OpenAPI
+  - url: collections/juro.postman_collection.json
+    type: PostmanCollection
+  - url: collections/juro.opencollection.json
+    type: OpenCollection
+  description: Subscribe to real-time contract lifecycle events and receive them as
+    outbound webhooks - contract.created, contract.signed, contract.edit,
+    contract.pdf_generated, contract.viewed, contract.commented, and the full
+    approval-request event set. Webhooks are configured in the Juro app under
+    Settings > Integrations > Webhooks; the programmatic registration endpoints
+    (POST /v3/webhooks and management verbs) are modeled here from Juro's help-center
+    guidance and flagged as endpointsModeled where not confirmed in the public
+    reference. Payloads support Basic auth or HMAC-SHA256 signature validation.
+common:
+- type: Authentication
+  url: authentication/juro-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/juro
+- type: Website
+  url: https://juro.com
+- type: Documentation
+  url: https://api-docs.juro.com/
+- type: Plans
+  url: plans/juro-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/juro-rate-limits.yml
+- type: FinOps
+  url: finops/juro-finops.yml
+- url: https://juro.com/pricing
+  type: Pricing
+- url: https://juro.com/terms/api-terms
+  type: TermsOfService
+- url: https://juro.com/learn
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

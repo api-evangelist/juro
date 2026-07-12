@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Juro API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "x-api-key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Health", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Check API status", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.juro.com/v3/health" },
+          "docs": "Returns the API status and confirms the API key is valid."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Templates", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List templates", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.juro.com/v3/templates?skip=0&limit=50" },
+          "docs": "Returns a paginated list of all templates accessible to the API key holder."
+        },
+        {
+          "info": { "name": "Retrieve a template", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/templates/:template_id",
+            "params": [
+              { "name": "template_id", "value": "", "type": "path", "description": "The ID of the template." }
+            ]
+          },
+          "docs": "Retrieves a single template by ID, including its smart fields."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Contracts", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List contracts", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.juro.com/v3/contracts?skip=0&limit=50" },
+          "docs": "Returns a paginated list of all contracts accessible to the API key holder."
+        },
+        {
+          "info": { "name": "Create a contract from a template", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Creates a new contract from a Juro template with smart-field data."
+        },
+        {
+          "info": { "name": "Upload a PDF as a contract", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.juro.com/v3/contracts/upload" },
+          "docs": "Creates a contract by uploading an existing PDF document (multipart/form-data)."
+        },
+        {
+          "info": { "name": "Retrieve a contract", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/contracts/:contract_id",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." }
+            ]
+          },
+          "docs": "Retrieves a single contract by ID, including smart fields and state."
+        },
+        {
+          "info": { "name": "Update a contract", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.juro.com/v3/contracts/:contract_id",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." }
+            ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates a contract's properties and smart-field values."
+        },
+        {
+          "info": { "name": "Delete a contract", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.juro.com/v3/contracts/:contract_id",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." }
+            ]
+          },
+          "docs": "Deletes a contract by ID."
+        },
+        {
+          "info": { "name": "Download contract PDF", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/pdf/binary",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." }
+            ]
+          },
+          "docs": "Downloads the generated or signed contract as a binary PDF."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Signatures", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Sign a contract", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/sign",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." }
+            ]
+          },
+          "docs": "Applies a signature to a contract on behalf of the API key holder's signing side."
+        },
+        {
+          "info": { "name": "Send a contract for signing", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/signing-request/:signing_side_uid",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." },
+              { "name": "signing_side_uid", "value": "", "type": "path", "description": "The UID of the signing side." }
+            ]
+          },
+          "docs": "Sends a signing request to a signing side of the contract."
+        },
+        {
+          "info": { "name": "Send a signing request to a signatory", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/signing-request/:signing_side_uid/signatures/:signature_uid",
+            "params": [
+              { "name": "contract_id", "value": "", "type": "path", "description": "The ID of the contract." },
+              { "name": "signing_side_uid", "value": "", "type": "path", "description": "The UID of the signing side." },
+              { "name": "signature_uid", "value": "", "type": "path", "description": "The UID of the signatory's signature." }
+            ]
+          },
+          "docs": "Sends a signing request to a specific signatory within a signing side."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List webhooks", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.juro.com/v3/webhooks" },
+          "docs": "Modeled. Lists webhook subscriptions. Webhooks are primarily managed in the Juro app."
+        },
+        {
+          "info": { "name": "Create a webhook", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/webhooks",
+            "body": { "type": "json", "data": "{\n  \"teamId\": \"\",\n  \"title\": \"\",\n  \"url\": \"\",\n  \"isEnabled\": true,\n  \"auth\": {},\n  \"events\": [\"contract.signed\"]\n}" }
+          },
+          "docs": "Modeled. Registers a webhook subscription for contract lifecycle events."
+        },
+        {
+          "info": { "name": "Delete a webhook", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.juro.com/v3/webhooks/:webhook_id",
+            "params": [
+              { "name": "webhook_id", "value": "", "type": "path", "description": "The ID of the webhook subscription." }
+            ]
+          },
+          "docs": "Modeled. Deletes a webhook subscription."
+        }
+      ]
+    }
+  ]
+}

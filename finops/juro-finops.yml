@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Juro
+providerId: juro
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Contract Management
+- CLM
+- Legal
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Juro spend. Juro is sold as an annual SaaS subscription priced by
+  platform tier (commonly Scale and Enterprise) plus optional AI add-ons, with
+  unlimited user seats on higher tiers - so the dominant cost driver is the tier and
+  contract volume, not per-seat headcount. The API is not separately metered as a
+  product; it is plan-gated and included with the subscription, but usage is bounded
+  by a monthly request quota (roughly 100/month on free access, roughly 30,000/month
+  on paid) with per-second rate limits. FinOps attention for Juro therefore centers
+  on right-sizing the subscription tier, tracking API request consumption against the
+  plan quota to avoid throttling or overage conversations, and attributing contract
+  throughput to the teams that generate it.
+notes: >-
+  Per-unit and tier rates are quote-based and not reconciled here; confirm with Juro.
+  The API carries a request quota rather than usage-based billing, so the FinOps
+  lever is quota headroom and tier selection rather than metered per-call spend.
+sources:
+- https://juro.com/pricing
+- https://api-docs.juro.com/
+- https://intercom.help/juro/en/articles/8075637-working-with-juro-s-api
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Juro
+serviceCategory: Contract Lifecycle Management
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Juro
+  ServiceCategory: Contract Lifecycle Management
+  ProviderName: Juro
+  PublisherName: Juro
+  InvoiceIssuerName: Juro
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: platform_subscription
+  description: Annual Juro platform subscription by tier (Scale, Enterprise). Primary cost.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - tier
+- name: api_requests
+  description: API requests consumed against the plan's monthly quota. Not separately billed, but bounded by quota and rate limits.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - endpoint
+- name: ai_addons
+  description: Optional AI drafting/review/summarization add-on spend where applicable.
+  unit: addon
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track API request consumption against the monthly plan quota and monitor which teams/integrations drive contract volume.
+- name: Allocation
+  description: Attribute the Juro subscription and API usage to the legal, sales, HR, and finance teams that create and sign contracts.
+- name: Optimization
+  description: Right-size the subscription tier to actual contract volume; use skip/limit pagination and webhooks (instead of polling) to stay within the API request quota and avoid overage conversations.
+- name: Accountability
+  description: Assign an owner for the Juro renewal and API quota; review request consumption and contract throughput before renewal.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
