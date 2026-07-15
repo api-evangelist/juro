@@ -125,6 +125,8 @@ apis:
     guidance and flagged as endpointsModeled where not confirmed in the public
     reference. Payloads support Basic auth or HMAC-SHA256 signature validation.
 common:
+- type: AgenticAccess
+  url: agentic-access/juro-agentic-access.yml
 - type: Authentication
   url: authentication/juro-authentication.yml
 - type: LinkedIn
