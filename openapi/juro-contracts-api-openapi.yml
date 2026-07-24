@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Juro Contracts API
+  description: 'The Juro API (v3) programmatically drives contract automation and contract lifecycle management (CLM) on the Juro platform. External systems can initiate contracts from Juro templates, upload existing PDFs as contracts, read and update contract smart fields, send contracts for e-signature, download signed PDFs, and subscribe to contract lifecycle events via webhooks. All requests are authenticated with an `x-api-key` header. API access is plan-gated - it is included with a Juro subscription and enabled through your Customer Success Manager. A sandbox environment is available at https://api-sandbox.juro.io/v3.
+
+    Endpoints under Contracts, Templates, and Signatures are confirmed from Juro''s public API reference (api-docs.juro.com). The Webhooks management endpoints are modeled from Juro''s help-center guidance; webhook subscriptions are primarily configured in the Juro app (Settings > Integrations > Webhooks). Operations marked `x-endpoint-modeled: true` were not confirmed in the public reference at the time of review.'
+  version: '3.0'
+  contact:
+    name: Juro
+    url: https://juro.com
+  termsOfService: https://juro.com/terms/api-terms
+servers:
+- url: https://api.juro.com/v3
+  description: Production
+- url: https://api-sandbox.juro.io/v3
+  description: Sandbox
+security:
+- apiKeyAuth: []
+tags:
+- name: Contracts
+  description: Create, read, update, delete, and upload contracts.
+paths:
+  /contracts:
+    get:
+      operationId: listContracts
+      tags:
+      - Contracts
+      summary: List contracts
+      description: Returns a paginated list of all contracts accessible to the API key holder.
+      parameters:
+      - $ref: '#/components/parameters/Skip'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A paginated list of contracts.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createContract
+      tags:
+      - Contracts
+      summary: Create a contract from a template
+      description: Creates a new contract from a Juro template, supplying values for the template smart fields.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The created contract.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /contracts/upload:
+    post:
+      operationId: uploadContract
+      tags:
+      - Contracts
+      summary: Upload a PDF as a contract
+      description: Creates a contract by uploading an existing PDF document.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: The created contract.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /contracts/{contract_id}:
+    get:
+      operationId: getContract
+      tags:
+      - Contracts
+      summary: Retrieve a contract
+      description: Retrieves a single contract by ID, including its smart fields and current state.
+      parameters:
+      - $ref: '#/components/parameters/ContractId'
+      responses:
+        '200':
+          description: The requested contract.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateContract
+      tags:
+      - Contracts
+      summary: Update a contract
+      description: Updates a contract's properties and smart-field values.
+      parameters:
+      - $ref: '#/components/parameters/ContractId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The updated contract.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteContract
+      tags:
+      - Contracts
+      summary: Delete a contract
+      description: Deletes a contract by ID.
+      parameters:
+      - $ref: '#/components/parameters/ContractId'
+      responses:
+        '204':
+          description: The contract was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /contracts/{contract_id}/pdf/binary:
+    get:
+      operationId: getContractPdf
+      tags:
+      - Contracts
+      summary: Download contract PDF
+      description: Downloads the generated or signed contract as a binary PDF.
+      parameters:
+      - $ref: '#/components/parameters/ContractId'
+      responses:
+        '200':
+          description: The contract PDF.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    Skip:
+      name: skip
+      in: query
+      required: false
+      description: Number of records to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 200).
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    ContractId:
+      name: contract_id
+      in: path
+      required: true
+      description: The unique ID of the contract.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: The API key is missing or invalid.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Juro app under Settings > Integrations > API. Sent as the `x-api-key` request header.

@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: Juro Contracts Health API
+  description: 'The Juro API (v3) programmatically drives contract automation and contract lifecycle management (CLM) on the Juro platform. External systems can initiate contracts from Juro templates, upload existing PDFs as contracts, read and update contract smart fields, send contracts for e-signature, download signed PDFs, and subscribe to contract lifecycle events via webhooks. All requests are authenticated with an `x-api-key` header. API access is plan-gated - it is included with a Juro subscription and enabled through your Customer Success Manager. A sandbox environment is available at https://api-sandbox.juro.io/v3.
+
+    Endpoints under Contracts, Templates, and Signatures are confirmed from Juro''s public API reference (api-docs.juro.com). The Webhooks management endpoints are modeled from Juro''s help-center guidance; webhook subscriptions are primarily configured in the Juro app (Settings > Integrations > Webhooks). Operations marked `x-endpoint-modeled: true` were not confirmed in the public reference at the time of review.'
+  version: '3.0'
+  contact:
+    name: Juro
+    url: https://juro.com
+  termsOfService: https://juro.com/terms/api-terms
+servers:
+- url: https://api.juro.com/v3
+  description: Production
+- url: https://api-sandbox.juro.io/v3
+  description: Sandbox
+security:
+- apiKeyAuth: []
+tags:
+- name: Health
+  description: API status and key validity.
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      tags:
+      - Health
+      summary: Check API status
+      description: Returns the API status and confirms the supplied API key is valid.
+      responses:
+        '200':
+          description: The API is healthy and the key is valid.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: The API key is missing or invalid.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Juro app under Settings > Integrations > API. Sent as the `x-api-key` request header.
