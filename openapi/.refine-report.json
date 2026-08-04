@@ -1,0 +1,22 @@
+{
+  "provider": "juro",
+  "sources": [
+    "juro-contracts-api-openapi.yml",
+    "juro-health-api-openapi.yml",
+    "juro-signatures-api-openapi.yml",
+    "juro-templates-api-openapi.yml",
+    "juro-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "juro-contracts-api-openapi.yml",
+    "juro-health-api-openapi.yml",
+    "juro-signatures-api-openapi.yml",
+    "juro-templates-api-openapi.yml",
+    "juro-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
