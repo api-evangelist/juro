@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Juro Contracts API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/contracts",
+            "params": [
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 200)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all contracts accessible to the API key holder."
+        },
+        {
+          "info": {
+            "name": "Create a contract from a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new contract from a Juro template, supplying values for the template smart fields."
+        },
+        {
+          "info": {
+            "name": "Upload a PDF as a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/upload",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a contract by uploading an existing PDF document."
+        },
+        {
+          "info": {
+            "name": "Retrieve a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/contracts/:contract_id",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              }
+            ]
+          },
+          "docs": "Retrieves a single contract by ID, including its smart fields and current state."
+        },
+        {
+          "info": {
+            "name": "Update a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.juro.com/v3/contracts/:contract_id",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a contract's properties and smart-field values."
+        },
+        {
+          "info": {
+            "name": "Delete a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.juro.com/v3/contracts/:contract_id",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              }
+            ]
+          },
+          "docs": "Deletes a contract by ID."
+        },
+        {
+          "info": {
+            "name": "Download contract PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/pdf/binary",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              }
+            ]
+          },
+          "docs": "Downloads the generated or signed contract as a binary PDF."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,156 @@
+{
+  "item": [
+    {
+      "id": "f2c35db6-78d6-4c77-921f-00ca32fe86d5",
+      "name": "Health",
+      "description": {
+        "content": "API status and key validity.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec46d439-d665-4817-a264-960f891f8f29",
+          "name": "Check API status",
+          "request": {
+            "name": "Check API status",
+            "description": {
+              "content": "Returns the API status and confirms the supplied API key is valid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "399b4ada-0cbf-4051-a016-fa25664dd8e6",
+              "name": "The API is healthy and the key is valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d47223ed-57dd-433f-9f2f-de7ad6db3b55",
+              "name": "The API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.juro.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3212eebc-d0b3-4fe2-af60-add6f63223d3",
+    "name": "Juro Contracts Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Juro API (v3) programmatically drives contract automation and contract lifecycle management (CLM) on the Juro platform. External systems can initiate contracts from Juro templates, upload existing PDFs as contracts, read and update contract smart fields, send contracts for e-signature, download signed PDFs, and subscribe to contract lifecycle events via webhooks. All requests are authenticated with an `x-api-key` header. API access is plan-gated - it is included with a Juro subscription and enabled through your Customer Success Manager. A sandbox environment is available at https://api-sandbox.juro.io/v3.\nEndpoints under Contracts, Templates, and Signatures are confirmed from Juro's public API reference (api-docs.juro.com). The Webhooks management endpoints are modeled from Juro's help-center guidance; webhook subscriptions are primarily configured in the Juro app (Settings > Integrations > Webhooks). Operations marked `x-endpoint-modeled: true` were not confirmed in the public reference at the time of review.\n\nContact Support:\n Name: Juro",
+      "type": "text/plain"
+    }
+  }
+}

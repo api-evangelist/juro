@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Juro Contracts Webhooks API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.juro.com/v3/webhooks"
+          },
+          "docs": "Lists the webhook subscriptions for a team. Modeled from Juro help-center guidance; webhooks are primarily managed in the Juro app."
+        },
+        {
+          "info": {
+            "name": "Create a webhook (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a webhook subscription for contract lifecycle events. Modeled from Juro help-center guidance (body includes teamId, title, url, isEnabled, auth, and events). Not confirmed in the public API reference."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.juro.com/v3/webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a webhook subscription. Modeled from Juro help-center guidance; not confirmed in the public API reference."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Juro Contracts Signatures API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signatures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sign a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/sign",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies a signature to a contract on behalf of the API key holder's signing side."
+        },
+        {
+          "info": {
+            "name": "Send a contract for signing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/signing-request/:signing_side_uid",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              },
+              {
+                "name": "signing_side_uid",
+                "value": "",
+                "type": "path",
+                "description": "The UID of the signing side."
+              }
+            ]
+          },
+          "docs": "Sends a signing request to a signing side of the contract."
+        },
+        {
+          "info": {
+            "name": "Send a signing request to a signatory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.juro.com/v3/contracts/:contract_id/signing-request/:signing_side_uid/signatures/:signature_uid",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the contract."
+              },
+              {
+                "name": "signing_side_uid",
+                "value": "",
+                "type": "path",
+                "description": "The UID of the signing side."
+              },
+              {
+                "name": "signature_uid",
+                "value": "",
+                "type": "path",
+                "description": "The UID of the signatory's signature."
+              }
+            ]
+          },
+          "docs": "Sends a signing request to a specific signatory within a signing side."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
