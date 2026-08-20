@@ -33,6 +33,15 @@ tags:
 - Contract Lifecycle
 - Contract Automation
 - Legal
+- Legal Tech
+- E-Signature
+- Contracts
+tags_raw:
+- Contract Management
+- CLM
+- Contract Lifecycle
+- Contract Automation
+- Legal
 - LegalTech
 - E-Signature
 - Contracts
@@ -118,6 +127,8 @@ apis:
   humanURL: https://api-docs.juro.com/
   baseURL: https://api.juro.com/v3
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
