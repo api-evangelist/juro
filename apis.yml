@@ -13,6 +13,18 @@ description: Juro is an AI-native contract automation and contract lifecycle man
   approval events, and more). API access is plan-gated - it is included with a Juro
   subscription and enabled through your Customer Success Manager - so live calls
   require an eligible plan and issued key.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
