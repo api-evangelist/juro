@@ -1,11 +1,7 @@
 {
   "provider": "juro",
   "sources": [
-    "juro-contracts-api-openapi.yml",
-    "juro-health-api-openapi.yml",
-    "juro-signatures-api-openapi.yml",
-    "juro-templates-api-openapi.yml",
-    "juro-webhooks-api-openapi.yml"
+    "_original/juro-openapi.yml"
   ],
   "outputs": [
     "juro-contracts-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "juro-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "juro-contracts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "juro-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "juro-signatures-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "juro-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "juro-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

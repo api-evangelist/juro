@@ -1,0 +1,30 @@
+# Front Door AI Index — juro — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: juro
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: juro.com
+  final_host: juro.com
+  ownership: own
+  owner: juro
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 22
+  host_score: 22
+  density: 24.69
+  words: 891
+  tiers:
+    agentic: 3
+    core: 15
+    model: 4
+  ambiguous: 5
+  top_terms:
+    AI: 15
+    automation: 5
+    Claude: 4
+    MCP: 1
+    copilot: 1
+    conversational AI: 1

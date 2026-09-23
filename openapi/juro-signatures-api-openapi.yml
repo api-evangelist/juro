@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Juro Contracts Signatures API
-  description: 'The Juro API (v3) programmatically drives contract automation and contract lifecycle management (CLM) on the Juro platform. External systems can initiate contracts from Juro templates, upload existing PDFs as contracts, read and update contract smart fields, send contracts for e-signature, download signed PDFs, and subscribe to contract lifecycle events via webhooks. All requests are authenticated with an `x-api-key` header. API access is plan-gated - it is included with a Juro subscription and enabled through your Customer Success Manager. A sandbox environment is available at https://api-sandbox.juro.io/v3.
-
-    Endpoints under Contracts, Templates, and Signatures are confirmed from Juro''s public API reference (api-docs.juro.com). The Webhooks management endpoints are modeled from Juro''s help-center guidance; webhook subscriptions are primarily configured in the Juro app (Settings > Integrations > Webhooks). Operations marked `x-endpoint-modeled: true` were not confirmed in the public reference at the time of review.'
+  title: Juro Signatures API
+  description: The Juro API (v3) programmatically drives contract automation and contract lifecycle management (CLM) on the Juro platform.
   version: '3.0'
   contact:
     name: Juro
@@ -78,24 +76,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: The API key is missing or invalid.
   parameters:
-    SigningSideUid:
-      name: signing_side_uid
-      in: path
-      required: true
-      description: The UID of the signing side.
-      schema:
-        type: string
     SignatureUid:
       name: signature_uid
       in: path
       required: true
       description: The UID of the signatory's signature.
+      schema:
+        type: string
+    SigningSideUid:
+      name: signing_side_uid
+      in: path
+      required: true
+      description: The UID of the signing side.
       schema:
         type: string
     ContractId:
@@ -105,6 +98,11 @@ components:
       description: The unique ID of the contract.
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: The API key is missing or invalid.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
