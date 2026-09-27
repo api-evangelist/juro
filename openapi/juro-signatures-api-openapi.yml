@@ -77,13 +77,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    SignatureUid:
-      name: signature_uid
-      in: path
-      required: true
-      description: The UID of the signatory's signature.
-      schema:
-        type: string
     SigningSideUid:
       name: signing_side_uid
       in: path
@@ -96,6 +89,13 @@ components:
       in: path
       required: true
       description: The unique ID of the contract.
+      schema:
+        type: string
+    SignatureUid:
+      name: signature_uid
+      in: path
+      required: true
+      description: The UID of the signatory's signature.
       schema:
         type: string
   responses:

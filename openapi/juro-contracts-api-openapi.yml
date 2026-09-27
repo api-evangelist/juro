@@ -146,11 +146,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: The API key is missing or invalid.
   parameters:
     Skip:
       name: skip
@@ -176,6 +171,11 @@ components:
         type: integer
         default: 50
         maximum: 200
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: The API key is missing or invalid.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
