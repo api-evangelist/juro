@@ -76,19 +76,17 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: The API key is missing or invalid.
   parameters:
     SigningSideUid:
       name: signing_side_uid
       in: path
       required: true
       description: The UID of the signing side.
-      schema:
-        type: string
-    ContractId:
-      name: contract_id
-      in: path
-      required: true
-      description: The unique ID of the contract.
       schema:
         type: string
     SignatureUid:
@@ -98,11 +96,13 @@ components:
       description: The UID of the signatory's signature.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: The API key is missing or invalid.
+    ContractId:
+      name: contract_id
+      in: path
+      required: true
+      description: The unique ID of the contract.
+      schema:
+        type: string
   securitySchemes:
     apiKeyAuth:
       type: apiKey
