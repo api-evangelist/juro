@@ -39,6 +39,10 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/juro.png
+x-docs-platform: slate
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
+x-docs-hosting: aws-cloudfront
 tags:
 - Contract Management
 - Contract Lifecycle Management
@@ -154,6 +158,9 @@ apis:
   - type: OpenCollection
     url: collections/juro.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/juro-capability-edges.yml
+  name: Juro Business Capability Map
 - type: AgenticAccess
   url: agentic-access/juro-agentic-access.yml
 - type: Authentication
