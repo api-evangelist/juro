@@ -107,10 +107,10 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: The API key is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

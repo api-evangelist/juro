@@ -146,21 +146,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: The API key is missing or invalid.
   parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of records to return (max 200).
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
     Skip:
       name: skip
       in: query
@@ -176,6 +162,20 @@ components:
       description: The unique ID of the contract.
       schema:
         type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of records to return (max 200).
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+  responses:
+    Unauthorized:
+      description: The API key is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

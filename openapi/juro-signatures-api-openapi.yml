@@ -77,18 +77,11 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: The API key is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
   parameters:
-    SigningSideUid:
-      name: signing_side_uid
-      in: path
-      required: true
-      description: The UID of the signing side.
-      schema:
-        type: string
     SignatureUid:
       name: signature_uid
       in: path
@@ -101,6 +94,13 @@ components:
       in: path
       required: true
       description: The unique ID of the contract.
+      schema:
+        type: string
+    SigningSideUid:
+      name: signing_side_uid
+      in: path
+      required: true
+      description: The UID of the signing side.
       schema:
         type: string
   securitySchemes:
