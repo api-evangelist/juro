@@ -1,0 +1,56 @@
+slug: juro
+provider: Juro
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Contracts
+  spec_file: juro-contracts-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.95
+  evidence: POST /contracts createContract Create a contract from a template; GET /contracts/{contract_id}
+    Retrieve a contract
+  reason: Explicit CRUD over contract records on a CLM platform described as 'contract automation and
+    contract lifecycle management' — unambiguously contract lifecycle from drafting to closure.
+- tag: Signatures
+  spec_file: juro-signatures-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.9
+  evidence: POST /contracts/{contract_id}/sign signContract Sign a contract; sendSigningRequest Send a
+    contract for signing
+  reason: Operations execute contract signing and route signing requests to signatories — the execution
+    phase of contract lifecycle management on an explicit CLM platform.
+- tag: Templates
+  spec_file: juro-templates-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.8
+  evidence: GET /templates listTemplates List templates; POST /contracts createContract Create a contract
+    from a template
+  reason: Templates on this CLM platform are contract templates used to author contracts, so they serve
+    contract drafting. Only list/get operations are exposed, so sub-capability inference rests partly
+    on the sibling contract-creation surface.
+- tag: Webhooks
+  spec_file: juro-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: POST /webhooks createWebhook Create a webhook (modeled)
+  reason: Create/list/delete of outbound webhook subscriptions for platform events — webhook subscription
+    lifecycle. Confidence reduced because the endpoints are marked '(modeled)' and no event schema or
+    delivery detail is shown.
