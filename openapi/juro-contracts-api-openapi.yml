@@ -146,22 +146,12 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: The API key is missing or invalid.
   parameters:
-    Skip:
-      name: skip
-      in: query
-      required: false
-      description: Number of records to skip for pagination.
-      schema:
-        type: integer
-        default: 0
-    ContractId:
-      name: contract_id
-      in: path
-      required: true
-      description: The unique ID of the contract.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -171,11 +161,21 @@ components:
         type: integer
         default: 50
         maximum: 200
-  responses:
-    Unauthorized:
-      description: The API key is missing or invalid.
-    NotFound:
-      description: The requested resource was not found.
+    ContractId:
+      name: contract_id
+      in: path
+      required: true
+      description: The unique ID of the contract.
+      schema:
+        type: string
+    Skip:
+      name: skip
+      in: query
+      required: false
+      description: Number of records to skip for pagination.
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     apiKeyAuth:
       type: apiKey
