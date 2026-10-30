@@ -1,4 +1,4 @@
-# Juro (juro)
+# Juro
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,127 +64,126 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Juro is an AI-native contract automation and contract lifecycle management (CLM) platform where legal, sales, HR, and finance teams create, negotiate, sign, and manage contracts in one browser-based workspace. Juro exposes a documented public REST API (v3, base `https://api.juro.com/v3`, with a sandbox at `https://api-sandbox.juro.io/v3`) authenticated with an `x-api-key` header. The API lets external systems initiate contracts from templates, upload PDFs, edit smart fields, send contracts for e-signature, download signed PDFs, and subscribe to contract lifecycle webhook events.
+Juro is an AI-native contract automation and contract lifecycle management (CLM) platform where legal, sales, HR, and finance teams create, negotiate, sign, and manage contracts in one browser-based workspace. Juro exposes a documented public REST API (v3, base https://api.juro.com/v3, with a sandbox at https://api-sandbox.juro.io/v3) authenticated with an x-api-key header. The API lets external systems initiate contracts from templates, upload PDFs, edit smart fields, send contracts for e-signature, download signed PDFs, and subscribe to a dozen-plus contract lifecycle webhook events (contract.created, contract.signed, approval events, and more). API access is plan-gated - it is included with a Juro subscription and enabled through your Customer Success Manager - so live calls require an eligible plan and issued key.
 
-**Access model:** Juro's API is **plan-gated**. API access is included with a Juro subscription and enabled through your Customer Success Manager, and the monthly request quota depends on your plan (roughly 100 requests/month on free access, roughly 30,000/month on paid). Live calls require an eligible plan and an issued `x-api-key`. This catalog entry was built from Juro's public API reference ([api-docs.juro.com](https://api-docs.juro.com/)) and help center; the Contracts, Templates, and Signatures endpoints are confirmed there, while the programmatic Webhooks-management endpoints are **modeled** (webhooks are primarily configured in the Juro app) and flagged as such.
+**Areas:** Contract Management · Contract Lifecycle Management · Contract Lifecycle · Contract Automation · Legal · Legal Tech · E-Signature · Contracts
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/juro/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/juro/refs/heads/main/apis.yml)
+## Juro on APIs.io
 
-## Tags
+Everything profiled for Juro is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/juro/](https://apis.io/providers/juro/)** — or go straight to one of the APIs or properties below.
 
-- Contract Management
-- CLM
-- Contract Lifecycle
-- Contract Automation
-- Legal
-- LegalTech
-- E-Signature
-- Contracts
+### APIs (5)
 
-## Timestamps
+- [Juro Contracts API](https://apis.io/apis/juro/juro-contracts-api/) — Create, read, update, delete, and upload contracts.
+- [Juro Health API](https://apis.io/apis/juro/juro-health-api/) — API status and key validity.
+- [Juro Signatures API](https://apis.io/apis/juro/juro-signatures-api/) — Send contracts for e-signature and apply signatures.
+- [Juro Templates API](https://apis.io/apis/juro/juro-templates-api/) — List and retrieve contract templates.
+- [Juro Webhooks API](https://apis.io/apis/juro/juro-webhooks-api/) — Subscribe to contract lifecycle events (modeled).
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Juro Contracts API
+#### Agentic access (1)
 
-Create, retrieve, list, update, and delete contracts. Initiate a contract from a Juro template with smart-field data, upload an existing PDF to create a contract, patch contract properties, list contracts with skip/limit pagination, and download the generated or signed PDF as binary. This is the core surface for the contract management use case.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://api-docs.juro.com/](https://api-docs.juro.com/)
-- **Base URL:** `https://api.juro.com/v3`
+- [Juro Agentic Access](https://apis.io/agentic-access/juro/juro-agentic-access/)
 
-#### Tags
+#### Collections (6)
 
-- Contract Management
-- CLM
-- Contracts
-- Contract Lifecycle
+Postman and Open Collection request collections.
 
-#### Properties
+- [Juro API](https://apis.io/collections/juro/open-juro/)
+- [Juro Contracts API](https://apis.io/collections/juro/open-juro-contracts-api/)
+- [Juro Contracts Health API](https://apis.io/collections/juro/open-juro-health-api/)
+- [Juro Contracts Signatures API](https://apis.io/collections/juro/open-juro-signatures-api/)
+- [Juro Contracts Templates API](https://apis.io/collections/juro/open-juro-templates-api/)
+- [Juro Contracts Webhooks API](https://apis.io/collections/juro/open-juro-webhooks-api/)
 
-- [Documentation](https://api-docs.juro.com/)
-- [API Reference](https://api-docs.juro.com/)
-- [OpenAPI](openapi/juro-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/juro.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/juro.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (1)
 
-### Juro Templates API
+Authentication, trust centre, and vulnerability disclosure.
 
-List the contract templates available to the API key holder and retrieve a specific template, including its smart fields, so external systems know what data to supply when initiating a new contract via the Contracts API.
+- [Juro Authentication](https://apis.io/security/juro/juro-authentication/)
 
-- **Human URL:** [https://api-docs.juro.com/](https://api-docs.juro.com/)
-- **Base URL:** `https://api.juro.com/v3`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Templates
-- Contract Management
-- CLM
+- [Juro Plans Pricing](https://apis.io/plans/juro/juro-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://api-docs.juro.com/)
-- [OpenAPI](openapi/juro-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/juro.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/juro.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Juro Signatures API
+- [Juro Rate Limits](https://apis.io/rate-limits/juro/juro-rate-limits/)
 
-Drive the e-signature stage of the contract lifecycle. Apply a signature to a contract, send a signing request to a signing side, and send a signing request to a specific signatory — moving a contract from drafted to fully executed without leaving your own system.
+#### FinOps (1)
 
-- **Human URL:** [https://api-docs.juro.com/](https://api-docs.juro.com/)
-- **Base URL:** `https://api.juro.com/v3`
+What the API costs to run, by operation.
 
-#### Tags
+- [Juro Finops](https://apis.io/finops/juro/juro-finops/)
 
-- E-Signature
-- Signatures
-- Contract Lifecycle
-- Legal
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://api-docs.juro.com/)
-- [OpenAPI](openapi/juro-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/juro.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/juro.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Juro Webhooks API
-
-Subscribe to real-time contract lifecycle events and receive them as outbound webhooks — `contract.created`, `contract.signed`, `contract.edit`, `contract.pdf_generated`, `contract.viewed`, `contract.commented`, and the full approval-request event set. Webhooks are configured in the Juro app under Settings > Integrations > Webhooks; the programmatic registration endpoints are **modeled** from Juro's help-center guidance and flagged `endpointsModeled` where not confirmed in the public reference. Payloads support Basic auth or HMAC-SHA256 signature validation.
-
-- **Human URL:** [https://api-docs.juro.com/](https://api-docs.juro.com/)
-- **Base URL:** `https://api.juro.com/v3`
-
-#### Tags
-
-- Webhooks
-- Events
-- Contract Lifecycle
-- CLM
-
-#### Properties
-
-- [Documentation](https://api-docs.juro.com/)
-- [OpenAPI](openapi/juro-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/juro.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/juro.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Authentication](authentication/juro-authentication.yml)
-- [LinkedIn](https://www.linkedin.com/company/juro)
 - [Website](https://juro.com)
 - [Documentation](https://api-docs.juro.com/)
-- [Plans](plans/juro-plans-pricing.yml)
-- [Rate Limits](rate-limits/juro-rate-limits.yml)
-- [Fin Ops](finops/juro-finops.yml)
 - [Pricing](https://juro.com/pricing)
-- [Terms of Service](https://juro.com/terms/api-terms)
+- [Blog](https://juro.com/learn)
+- [Terms of service](https://juro.com/terms/api-terms)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 53.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 28.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 9.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/juro/](https://apis.io/providers/juro/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Juro: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/juro/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
